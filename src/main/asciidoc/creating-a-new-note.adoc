@@ -1,0 +1,20 @@
+== Creating a new note
+
+To create a new note, use the following request:
+
+include::{snippets}/post-note/success/http-request.adoc[]
+
+Assuming that note has been created, the response will be:
+
+include::{snippets}/post-note/success/http-response.adoc[]
+include::{snippets}/post-note/success/response-headers.adoc[]
+
+If you don't provide the valid field values, like this:
+
+include::{snippets}/post-note/bad-request-validation/http-request.adoc[]
+
+you'll get a response like this:
+
+include::{snippets}/post-note/bad-request-validation/http-response.adoc[]
+include::{snippets}/post-note/bad-request-validation/response-fields.adoc[]
+

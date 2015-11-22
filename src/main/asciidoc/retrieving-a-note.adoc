@@ -1,0 +1,16 @@
+== Retrieving a note
+
+To retrieve a note, use the following request:
+
+include::{snippets}/get-note/success/http-request.adoc[]
+include::{snippets}/get-note/success/path-parameters.adoc[]
+
+Assuming that the note exists, the response will be:
+
+include::{snippets}/get-note/success/http-response.adoc[]
+include::{snippets}/get-note/success/response-fields.adoc[]
+
+If it appears that requested note doesn't exist, you'll get a response like this:
+
+include::{snippets}/get-note/not-found/http-response.adoc[]
+

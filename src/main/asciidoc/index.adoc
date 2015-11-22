@@ -1,0 +1,11 @@
+= Note API
+:numbered:
+:toc: left
+:source-highlighter: highlightjs
+
+include::retrieving-a-note.adoc[]
+include::retrieving-a-list-of-notes.adoc[]
+include::creating-a-new-note.adoc[]
+include::creating-or-updating-a-note.adoc[]
+include::deleting-a-note.adoc[]
+

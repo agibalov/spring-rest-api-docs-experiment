@@ -1,0 +1,14 @@
+== Deleting a note
+
+To delete a note, use the following request:
+
+include::{snippets}/delete-note/success/http-request.adoc[]
+include::{snippets}/get-note/success/path-parameters.adoc[]
+
+Assuming that the note exists, the response will be:
+
+include::{snippets}/delete-note/success/http-response.adoc[]
+
+If it appears that note doesn't exist, you'll get a response like this:
+
+include::{snippets}/delete-note/not-found/http-response.adoc[]

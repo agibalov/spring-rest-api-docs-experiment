@@ -1,0 +1,27 @@
+== Creating or updating a note
+
+Use `PUT` request to create a new note with `id` of your choice or update an existing note:
+
+include::{snippets}/put-note/create-new-success/http-request.adoc[]
+include::{snippets}/put-note/create-new-success/path-parameters.adoc[]
+
+If note with this `id` already exists, it will be updated. Otherwise, a new note will be created.
+If note already exists, you'll get a response like this:
+
+include::{snippets}/put-note/update-existing-success/http-response.adoc[]
+
+If new note is created, you'll get a response like this:
+
+include::{snippets}/put-note/create-new-success/http-response.adoc[]
+include::{snippets}/put-note/create-new-success/response-headers.adoc[]
+
+If you don't provide the valid field values, like this:
+
+include::{snippets}/put-note/create-new-bad-request-validation-error/http-request.adoc[]
+
+You'll get a response like this:
+
+include::{snippets}/put-note/create-new-bad-request-validation-error/http-response.adoc[]
+include::{snippets}/put-note/create-new-bad-request-validation-error/response-fields.adoc[]
+
+

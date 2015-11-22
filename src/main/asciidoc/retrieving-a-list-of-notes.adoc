@@ -1,0 +1,11 @@
+== Retrieving a list of notes
+
+To retrieve a list of notes, use the following request:
+
+include::{snippets}/get-notes/success/http-request.adoc[]
+
+Assuming there are already a few notes, the response will be:
+
+include::{snippets}/get-notes/success/http-response.adoc[]
+include::{snippets}/get-notes/success/response-fields.adoc[]
+
