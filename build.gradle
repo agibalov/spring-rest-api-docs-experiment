@@ -68,3 +68,6 @@ jar {
         include 'restdocs.html'
     }
 }
+
+task stage(dependsOn: 'bootRepackage') {
+}
