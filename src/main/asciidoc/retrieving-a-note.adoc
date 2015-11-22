@@ -13,4 +13,5 @@ include::{snippets}/get-note/success/response-fields.adoc[]
 If it appears that requested note doesn't exist, you'll get a response like this:
 
 include::{snippets}/get-note/not-found/http-response.adoc[]
+include::{snippets}/get-note/not-found/response-fields.adoc[]
 

@@ -53,6 +53,9 @@ test {
 
 asciidoctor {
     sourceDir 'src/main/asciidoc'
+    sources {
+        include 'restdocs.adoc'
+    }
     attributes 'snippets': snippetsDir
     inputs.dir snippetsDir
     dependsOn test
@@ -61,6 +64,7 @@ asciidoctor {
 jar {
     dependsOn asciidoctor
     from ("${asciidoctor.outputDir}/html5") {
-        into 'resources/restdocs'
+        into 'resources/'
+        include 'restdocs.html'
     }
 }

@@ -5,6 +5,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 
 import static org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.delete;
+import static org.springframework.restdocs.payload.PayloadDocumentation.fieldWithPath;
+import static org.springframework.restdocs.payload.PayloadDocumentation.responseFields;
 import static org.springframework.restdocs.request.RequestDocumentation.parameterWithName;
 import static org.springframework.restdocs.request.RequestDocumentation.pathParameters;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -35,6 +37,10 @@ public class DeleteNote extends AbstractDocumentationTest {
         document.snippets(
                 pathParameters(
                         parameterWithName("id").description("Note identifier")
+                ),
+                responseFields(
+                        fieldWithPath("error").description("Error reason"),
+                        fieldWithPath("message").description("Human-readable error message")
                 ));
 
         mockMvc.perform(delete("/api/notes/{id}", "123")

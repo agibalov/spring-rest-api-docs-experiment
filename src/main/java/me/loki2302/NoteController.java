@@ -1,6 +1,10 @@
 package me.loki2302;
 
 import io.swagger.annotations.*;
+import me.loki2302.dto.NotFoundErrorDto;
+import me.loki2302.dto.NoteAttributesDto;
+import me.loki2302.dto.NoteDto;
+import me.loki2302.dto.ValidationErrorDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -55,7 +59,8 @@ public class NoteController {
             ),
             @ApiResponse(
                     code = 400, // OK
-                    message = "Request was not valid" // OK
+                    message = "Request was not valid", // OK
+                    response = ValidationErrorDto.class // OK
             )
     })
     public ResponseEntity createNote(
@@ -101,7 +106,8 @@ public class NoteController {
             ),
             @ApiResponse(
                     code = 400, // OK
-                    message = "Request was not valid" // OK
+                    message = "Request was not valid", // OK
+                    response = ValidationErrorDto.class // OK
             )
     })
     public ResponseEntity createOrUpdateNote(
@@ -172,7 +178,8 @@ public class NoteController {
             ),
             @ApiResponse( // OK
                     code = 404,
-                    message = "Note doesn't exist"
+                    message = "Note doesn't exist",
+                    response = NotFoundErrorDto.class
             )
     })
     public ResponseEntity getNote(
@@ -204,7 +211,8 @@ public class NoteController {
             ),
             @ApiResponse( // OK
                     code = 404,
-                    message = "Note doesn't exist"
+                    message = "Note doesn't exist",
+                    response = NotFoundErrorDto.class
             )
     })
     public ResponseEntity deleteNote(
@@ -234,10 +242,7 @@ public class NoteController {
         Map<String, String> errorFields = bindingResult.getFieldErrors().stream()
                 .collect(Collectors.toMap(FieldError::getField, FieldError::getDefaultMessage));
 
-        Map<String, Object> dto = new HashMap<>();
-        dto.put("error", "VALIDATION");
-        dto.put("errorFields", errorFields);
-        return new ResponseEntity(dto, HttpStatus.BAD_REQUEST);
+        return new ResponseEntity(new ValidationErrorDto(errorFields), HttpStatus.BAD_REQUEST);
     }
 
     private static NoteDto makeNoteDtoFromNote(Note note) {

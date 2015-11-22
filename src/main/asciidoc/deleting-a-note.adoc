@@ -12,3 +12,5 @@ include::{snippets}/delete-note/success/http-response.adoc[]
 If it appears that note doesn't exist, you'll get a response like this:
 
 include::{snippets}/delete-note/not-found/http-response.adoc[]
+include::{snippets}/delete-note/not-found/response-fields.adoc[]
+

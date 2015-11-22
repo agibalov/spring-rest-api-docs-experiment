@@ -1,4 +1,4 @@
-package me.loki2302;
+package me.loki2302.dto;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;

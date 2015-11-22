@@ -1,6 +1,8 @@
 package me.loki2302;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import me.loki2302.dto.NoteAttributesDto;
+import me.loki2302.dto.NoteDto;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -23,8 +25,8 @@ public class PutNote extends AbstractDocumentationTest {
 
     @Test
     public void createNewSuccess() throws Exception {
-        NoteDto noteDto = new NoteDto();
-        noteDto.text = "hello there";
+        NoteAttributesDto noteAttributesDto = new NoteAttributesDto();
+        noteAttributesDto.text = "hello there";
 
         document.snippets(
                 pathParameters(
@@ -37,14 +39,14 @@ public class PutNote extends AbstractDocumentationTest {
         mockMvc.perform(put("/api/notes/{id}", "123")
                 .accept(MediaType.APPLICATION_JSON)
                 .contentType(MediaType.APPLICATION_JSON)
-                .content(objectMapper.writeValueAsString(noteDto)))
+                .content(objectMapper.writeValueAsString(noteAttributesDto)))
                 .andExpect(status().isCreated());
     }
 
     @Test
     public void createNewBadRequestValidationError() throws Exception {
-        NoteDto noteDto = new NoteDto();
-        noteDto.text = "";
+        NoteAttributesDto noteAttributesDto = new NoteAttributesDto();
+        noteAttributesDto.text = "";
 
         document.snippets(
                 pathParameters(
@@ -52,13 +54,14 @@ public class PutNote extends AbstractDocumentationTest {
                 ),
                 responseFields(
                         fieldWithPath("error").description("Error reason"),
+                        fieldWithPath("message").description("Human-readable error message"),
                         fieldWithPath("errorFields").description("Fields in error")
                 ));
 
         mockMvc.perform(put("/api/notes/{id}", "123")
                 .accept(MediaType.APPLICATION_JSON)
                 .contentType(MediaType.APPLICATION_JSON)
-                .content(objectMapper.writeValueAsString(noteDto)))
+                .content(objectMapper.writeValueAsString(noteAttributesDto)))
                 .andExpect(status().isBadRequest());
     }
 
@@ -69,8 +72,8 @@ public class PutNote extends AbstractDocumentationTest {
         note.text = "hi";
         noteRepository.save(note);
 
-        NoteDto noteDto = new NoteDto();
-        noteDto.text = "hello there";
+        NoteAttributesDto noteAttributesDto = new NoteAttributesDto();
+        noteAttributesDto.text = "hello there";
 
         document.snippets(
                 pathParameters(
@@ -80,7 +83,7 @@ public class PutNote extends AbstractDocumentationTest {
         mockMvc.perform(put("/api/notes/{id}", "123")
                 .accept(MediaType.APPLICATION_JSON)
                 .contentType(MediaType.APPLICATION_JSON)
-                .content(objectMapper.writeValueAsString(noteDto)))
+                .content(objectMapper.writeValueAsString(noteAttributesDto)))
                 .andExpect(status().isNoContent());
     }
 
@@ -91,8 +94,8 @@ public class PutNote extends AbstractDocumentationTest {
         note.text = "hi";
         noteRepository.save(note);
 
-        NoteDto noteDto = new NoteDto();
-        noteDto.text = "";
+        NoteAttributesDto noteAttributesDto = new NoteAttributesDto();
+        noteAttributesDto.text = "";
 
         document.snippets(
                 pathParameters(
@@ -100,13 +103,14 @@ public class PutNote extends AbstractDocumentationTest {
                 ),
                 responseFields(
                         fieldWithPath("error").description("Error reason"),
+                        fieldWithPath("message").description("Human-readable error message"),
                         fieldWithPath("errorFields").description("Fields in error")
                 ));
 
         mockMvc.perform(put("/api/notes/{id}", "123")
                 .accept(MediaType.APPLICATION_JSON)
                 .contentType(MediaType.APPLICATION_JSON)
-                .content(objectMapper.writeValueAsString(noteDto)))
+                .content(objectMapper.writeValueAsString(noteAttributesDto)))
                 .andExpect(status().isBadRequest());
     }
 }

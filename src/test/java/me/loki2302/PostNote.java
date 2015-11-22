@@ -1,6 +1,7 @@
 package me.loki2302;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import me.loki2302.dto.NoteAttributesDto;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -18,8 +19,8 @@ public class PostNote extends AbstractDocumentationTest {
 
     @Test
     public void success() throws Exception {
-        NoteDto noteDto = new NoteDto();
-        noteDto.text = "hello there";
+        NoteAttributesDto noteAttributesDto = new NoteAttributesDto();
+        noteAttributesDto.text = "hello there";
 
         document.snippets(responseHeaders(
                 headerWithName("Location").description("The note location")
@@ -28,24 +29,25 @@ public class PostNote extends AbstractDocumentationTest {
         mockMvc.perform(post("/api/notes/")
                 .accept(MediaType.APPLICATION_JSON)
                 .contentType(MediaType.APPLICATION_JSON)
-                .content(objectMapper.writeValueAsString(noteDto)))
+                .content(objectMapper.writeValueAsString(noteAttributesDto)))
                 .andExpect(status().isCreated());
     }
 
     @Test
     public void badRequestValidation() throws Exception {
-        NoteDto noteDto = new NoteDto();
-        noteDto.text = "";
+        NoteAttributesDto noteAttributesDto = new NoteAttributesDto();
+        noteAttributesDto.text = "";
 
         document.snippets(responseFields(
                 fieldWithPath("error").description("Error reason"),
+                fieldWithPath("message").description("Human-readable error message"),
                 fieldWithPath("errorFields").description("Fields in error")
         ));
 
         mockMvc.perform(post("/api/notes/")
                 .accept(MediaType.APPLICATION_JSON)
                 .contentType(MediaType.APPLICATION_JSON)
-                .content(objectMapper.writeValueAsString(noteDto)))
+                .content(objectMapper.writeValueAsString(noteAttributesDto)))
                 .andExpect(status().isBadRequest());
     }
 }

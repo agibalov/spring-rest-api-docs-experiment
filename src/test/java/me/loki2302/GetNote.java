@@ -41,6 +41,10 @@ public class GetNote extends AbstractDocumentationTest {
         document.snippets(
                 pathParameters(
                         parameterWithName("id").description("Note identifier")
+                ),
+                responseFields(
+                        fieldWithPath("error").description("Error reason"),
+                        fieldWithPath("message").description("Human-readable error message")
                 ));
 
         mockMvc.perform(get("/api/notes/{id}", "123")

@@ -1,5 +1,4 @@
 = Note API
-:numbered:
 :toc: left
 :source-highlighter: highlightjs
 
