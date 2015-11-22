@@ -21,7 +21,7 @@ public class App {
     @Bean
     public Docket docket() {
         ApiInfo apiInfo = new ApiInfoBuilder()
-                .title("My API")
+                .title("Note API")
                 .build();
 
         return new Docket(DocumentationType.SWAGGER_2)
